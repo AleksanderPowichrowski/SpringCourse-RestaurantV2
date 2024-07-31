@@ -1,0 +1,4 @@
+rootProject.name = 'Restaurant'
+include 'restaurant-data'
+include 'restaurant-web'
+
