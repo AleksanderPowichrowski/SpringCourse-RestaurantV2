@@ -1,0 +1,12 @@
+package com.app.resturant.model.constants;
+
+public enum STATUS {
+    INGREDIENT_OUT_OF_STOCK,
+    INGREDIENT_AVAILABLE,
+    INGREDIENT_TOO_MUCH,
+    INGREDIENTS_ACCEPTED,
+    INGREDIENTS_TAKEN,
+    UNKNOWN_INGREDIENT,
+    UNKNOWN_STATUS,
+    COMPLETED;
+}
