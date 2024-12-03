@@ -5,7 +5,7 @@ import com.app.resturant.service.CrudService;
 
 import java.util.*;
 
-public class AbstractMapService<T extends BaseEntity, ID> implements CrudService<T, ID> {
+public class AbstractMapService<T extends BaseEntity, ID extends Long> implements CrudService<T, ID> {
     protected Map<Long, T> map = new HashMap<>();
 
 

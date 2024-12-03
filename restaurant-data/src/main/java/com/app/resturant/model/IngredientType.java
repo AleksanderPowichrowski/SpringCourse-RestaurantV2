@@ -23,5 +23,6 @@ public class IngredientType extends BaseEntity{
     @Builder
     public IngredientType(String name, boolean isVegan) {
         this.name=name;
+        this.isVegan = isVegan;
     }
 }

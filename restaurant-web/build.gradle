@@ -32,6 +32,7 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
     runtimeOnly 'com.h2database:h2' // Or your DB driver
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation project(":restaurant-data")
 }
 
 tasks.named('test') {

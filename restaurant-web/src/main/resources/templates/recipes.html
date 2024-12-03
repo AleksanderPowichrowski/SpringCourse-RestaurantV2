@@ -3,8 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Ensures no extra space between cells */
+        }
+
+        th, td {
+            padding: 8px; /* Adds padding inside cells */
+            text-align: left; /* Left-aligns both header and data cells */
+            border: 1px solid #ddd; /* Adds border to each cell */
+        }
+
+        th {
+            background-color: #f4f4f4; /* Adds background color to headers */
+        }
+
+        td {
+            word-wrap: break-word; /* Ensures content inside cells breaks properly */
+        }
+    </style>
 </head>
 <body>
 <h1 th:text="'List of Recipes'"></h1>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Recipe Name</th>
+        <th>Ingredients</th>
+        <th>Kitchenware</th>
+        <th>Instructions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entry : ${recipesWithDetails}">
+        <td th:text="${entry.key.id}">Recipe Name</td>
+        <td th:text="${entry.key.name}">Recipe Name</td>
+        <td th:utext="${entry.value.ingredients}">Ingredients</td>
+        <td th:utext="${entry.value.kitchenWare}">Kitchenware</td>
+        <td th:utext="${entry.key.instructions != null ?
+          #strings.listJoin(entry.key.instructions.values().stream().toList(), '<br/>') : 'No instructions'}">
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
+

@@ -1,0 +1,83 @@
+restaurant:
+  name: bar mleczny
+  ingredientType:
+    - name: ONION
+      vegan: true
+    - name: PEPPER
+      vegan: true
+    - name: SALAD
+      vegan: true
+    - name: CORN
+      vegan: true
+    - name: CHICKEN
+      vegan: false
+    - name: BEEF
+      vegan: false
+    - name: PORK
+      vegan: false
+    - name: FISH
+      vegan: false
+    - name: LAMB
+      vegan: false
+  stockCapacity:
+    ONION:
+      amount: 40
+    PEPPER:
+      amount: 40
+    SALAD:
+      amount: 40
+    CORN:
+      amount: 40
+    CHICKEN:
+      amount: 40
+    BEEF:
+      amount: 40
+    PORK:
+      amount: 40
+    FISH:
+      amount: 40
+    LAMB:
+      amount: 40
+  kitchenWare:
+    - fryingPan
+    - knife
+    - choppingBoard
+    - spatula
+    - bowl
+  recipes:
+    - name: "Fried chicken with sliced vegetables"
+      neededIngredients:
+        ONION: 2
+        PEPPER: 3
+      neededKitchenWare:
+        - "fryingPan"
+        - "knife"
+        - "choppingBoard"
+      instructions:
+        "1": "Chop vegetables"
+        "2": "Chop chicken"
+        "3": "Fry chopped chicken"
+        "4": "Add vegetables to frying chicken"
+
+    - name: "Vegetable Stir Fry"
+      neededIngredients:
+        SALAD: 2
+        CORN: 1
+      neededKitchenWare:
+        - "wok"
+        - "spatula"
+      instructions:
+        "1": "Chop salad"
+        "2": "Cook corn"
+        "3": "Stir fry vegetables"
+        "4": "Serve with rice"
+  chiefs:
+    - name: "John Doe"
+      chiefLevel: "MASTER"
+      knownRecipes:
+        - "Fried chicken with sliced vegetables"
+        - "Vegetable Stir Fry"
+    - name: "Jane Smith"
+      chiefLevel: "BEGINNER"
+      knownRecipes:
+        - "Vegetable Stir Fry"

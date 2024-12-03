@@ -3,8 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Ensures no extra space between cells */
+        }
+
+        th, td {
+            padding: 8px; /* Adds padding inside cells */
+            text-align: left; /* Left-aligns both header and data cells */
+            border: 1px solid #ddd; /* Adds border to each cell */
+        }
+
+        th {
+            background-color: #f4f4f4; /* Adds background color to headers */
+        }
+
+        td {
+            word-wrap: break-word; /* Ensures content inside cells breaks properly */
+        }
+    </style>
 </head>
 <body>
 <h1 th:text="'List of Ciefs'"></h1>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Level</th>
+        <th>Known Recipes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entry : ${chiefsWithDetails}">
+        <td th:text="${entry.key.id}">Chief Name</td>
+        <td th:text="${entry.key.name}">Chief Name</td>
+        <td th:text="${entry.key.chiefLevel}">Chief Level</td>
+        <td th:utext="${entry.value}">Known Recipes</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
