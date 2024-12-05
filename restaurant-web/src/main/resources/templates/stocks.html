@@ -1,32 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'recipes')}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse; /* Ensures no extra space between cells */
-    }
-
-    th, td {
-        padding: 8px; /* Adds padding inside cells */
-        text-align: left; /* Left-aligns both header and data cells */
-        border: 1px solid #ddd; /* Adds border to each cell */
-    }
-
-    th {
-        background-color: #f4f4f4; /* Adds background color to headers */
-    }
-
-    td {
-        word-wrap: break-word; /* Ensures content inside cells breaks properly */
-    }
-</style>
+    <link rel="stylesheet" href="/css/styles.css">
 <body>
 <h1 th:text="'List of Stocks'"></h1>
-<table>
+<table class="table table-striped">
     <thead>
     <tr>
         <th>Id</th>

@@ -32,7 +32,7 @@ public class StockController {
 
             // Convert the ingredientStock map to a list of strings formatted as "IngredientName (amount)"
             String ingredientsFormatted = ingredientStock.entrySet().stream()
-                    .map(entry -> entry.getKey().getName() + " (" + entry.getValue() + ")")
+                    .map(entry -> entry.getKey().getName() + " - " + entry.getValue())
                     .collect(Collectors.joining("<br/>"));
 
             // Create a map to hold both the stock date and the formatted ingredient stock

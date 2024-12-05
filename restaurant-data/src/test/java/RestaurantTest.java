@@ -95,16 +95,16 @@ public class RestaurantTest {
         IngredientType pork = IngredientType.builder().name("PORK").isVegan(false).build();
         IngredientType fish = IngredientType.builder().name("FISH").isVegan(false).build();
         IngredientType lamb = IngredientType.builder().name("LAMB").isVegan(false).build();
-        Map<IngredientType, Integer> ingredientStock = Map.of(
-                onion, 10,
-                pepper, 10,
-                salad, 10,
-                corn, 10,
-                chicken, 10,
-                beef, 10,
-                pork, 10,
-                fish, 10,
-                lamb, 10
+        Map<IngredientType, Long> ingredientStock = Map.of(
+                onion, 10L,
+                pepper, 10L,
+                salad, 10L,
+                corn, 10L,
+                chicken, 10L,
+                beef, 10L,
+                pork, 10L,
+                fish, 10L,
+                lamb, 10L
                 );
 
         Stock stock = Stock.builder()
@@ -154,10 +154,10 @@ public class RestaurantTest {
         IngredientType pepper = IngredientType.builder().name("PEPPER").isVegan(true).build();
         IngredientType chicken = IngredientType.builder().name("CHICKEN").isVegan(false).build();
 
-        Map<IngredientType, Long> neededIngredients = Map.of(
-                onion, 2L,
-                pepper, 3L,
-                chicken, 1L
+        Map<IngredientType, Integer> neededIngredients = Map.of(
+                onion, 2,
+                pepper, 3,
+                chicken, 1
         );
 
         Map<Long,String> recipeInstructions = new HashMap<>();
@@ -229,10 +229,10 @@ public class RestaurantTest {
         IngredientType pepper = IngredientType.builder().name("PEPPER").isVegan(true).build();
         IngredientType chicken = IngredientType.builder().name("CHICKEN").isVegan(false).build();
 
-        Map<IngredientType, Long> neededIngredients = Map.of(
-                onion, 2L,
-                pepper, 3L,
-                chicken, 1L
+        Map<IngredientType, Integer> neededIngredients = Map.of(
+                onion, 2,
+                pepper, 3,
+                chicken, 1
         );
 
         Map<Long,String> recipeInstructions = new HashMap<>();
@@ -261,10 +261,10 @@ public class RestaurantTest {
         IngredientType pepper = IngredientType.builder().name("PEPPER").isVegan(true).build();
         IngredientType chicken = IngredientType.builder().name("BEEF").isVegan(false).build();
 
-        Map<IngredientType, Long> neededIngredients = Map.of(
-                onion, 2L,
-                pepper, 3L,
-                chicken, 1L
+        Map<IngredientType, Integer> neededIngredients = Map.of(
+                onion, 2,
+                pepper, 3,
+                chicken, 1
         );
 
         Map<Long,String> recipeInstructions = new HashMap<>();
@@ -295,11 +295,11 @@ public class RestaurantTest {
         IngredientType salad = IngredientType.builder().name("SALAD").isVegan(false).build();
         IngredientType corn = IngredientType.builder().name("CORN").isVegan(false).build();
 
-        Map<IngredientType, Long> neededIngredients = Map.of(
-                onion, 2L,
-                pepper, 3L,
-                salad, 1L,
-                corn,2L
+        Map<IngredientType, Integer> neededIngredients = Map.of(
+                onion, 2,
+                pepper, 3,
+                salad, 1,
+                corn,2
         );
 
         Map<Long,String> recipeInstructions = new HashMap<>();
