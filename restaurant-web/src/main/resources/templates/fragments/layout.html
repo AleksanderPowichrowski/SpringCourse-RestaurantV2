@@ -66,6 +66,11 @@
                     <span>Error</span>
                 </li>
                 <li
+                        th:replace="~{::menuItem ('/kitchenwares','kitchenwares','list of kitchenwares in restuarant','list kitchenwares','Kitchenware list')}">
+                    <span class="fa exclamation-triangle" aria-hidden="true"></span>
+                    <span>Error</span>
+                </li>
+                <li
                         th:replace="~{::menuItem ('/stocks','stocks','history list of stokcs','list stocks histort','Stock History')}">
                     <span class="fa exclamation-triangle" aria-hidden="true"></span>
                     <span>Error</span>

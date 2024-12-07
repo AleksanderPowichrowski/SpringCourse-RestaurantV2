@@ -1,5 +1,10 @@
 restaurant:
   name: bar mleczny
+  units:
+    - kg
+    - tbsp
+    - glass
+    - u
   ingredientType:
     - name: ONION
       vegan: true
@@ -22,33 +27,47 @@ restaurant:
   stockCapacity:
     ONION:
       amount: 40
+      unit: "kg"
     PEPPER:
       amount: 40
+      unit: "kg"
     SALAD:
       amount: 40
+      unit: "kg"
     CORN:
       amount: 40
+      unit: "kg"
     CHICKEN:
       amount: 40
+      unit: "kg"
     BEEF:
       amount: 40
+      unit: "kg"
     PORK:
       amount: 40
+      unit: "kg"
     FISH:
       amount: 40
+      unit: "kg"
     LAMB:
       amount: 40
+      unit: "kg"
   kitchenWare:
     - fryingPan
     - knife
     - choppingBoard
     - spatula
     - bowl
+    - wok
   recipes:
     - name: "Fried chicken with sliced vegetables"
       neededIngredients:
-        ONION: 2
-        PEPPER: 3
+        ONION:
+          amount: 2
+          unit: "u"
+        PEPPER:
+          amount: 3
+          unit: "u"
       neededKitchenWare:
         - "fryingPan"
         - "knife"
@@ -61,8 +80,12 @@ restaurant:
 
     - name: "Vegetable Stir Fry"
       neededIngredients:
-        SALAD: 2
-        CORN: 1
+        SALAD:
+          amount: 2
+          unit: "u"
+        CORN:
+          amount: 1
+          unit: "u"
       neededKitchenWare:
         - "wok"
         - "spatula"
@@ -72,12 +95,12 @@ restaurant:
         "3": "Stir fry vegetables"
         "4": "Serve with rice"
   chiefs:
-    - name: "John Doe"
+    - name: "John Lennon"
       chiefLevel: "MASTER"
       knownRecipes:
         - "Fried chicken with sliced vegetables"
         - "Vegetable Stir Fry"
-    - name: "Jane Smith"
+    - name: "Jan Kowalski"
       chiefLevel: "BEGINNER"
       knownRecipes:
         - "Vegetable Stir Fry"

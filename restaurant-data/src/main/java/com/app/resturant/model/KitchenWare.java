@@ -1,17 +1,19 @@
 package com.app.resturant.model;
 
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "kitchen_ware")
-@ToString
-@Getter
-@Setter
-public class KitchenWare extends BaseEntity{
-    private String name;
+@Data
+@Entity
+@NoArgsConstructor
+public class KitchenWare extends NamedBaseEntity{
 
     @Builder
     public KitchenWare(String name){
-        this.name = name;
+       super(name);
     }
 }

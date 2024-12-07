@@ -28,5 +28,5 @@ test {
     useJUnitPlatform()
 }
 springBoot {
-    mainClass = 'com.ap.restaurant.web.RestaurantWebApplicationn'  // Replace with your main class
+    mainClass = 'com.app.restaurant.web.RestaurantWebApplication'  // Replace with your main class
 }

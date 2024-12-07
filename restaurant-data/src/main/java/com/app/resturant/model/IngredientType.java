@@ -1,28 +1,24 @@
 package com.app.resturant.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 
 
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "types")
-@ToString
+@Entity
 @NoArgsConstructor
-@Setter
-@Getter
-public class IngredientType extends BaseEntity{
+@Data
+public class IngredientType extends NamedBaseEntity {
 
-    @Column(name = "name")
-    private String name;
     @Column(name = "vegan")
     private boolean isVegan;
 
     @Builder
     public IngredientType(String name, boolean isVegan) {
-        this.name=name;
+       super(name);
         this.isVegan = isVegan;
     }
 }

@@ -1,18 +1,13 @@
 package com.app.resturant.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 @MappedSuperclass
-public class BaseEntity implements Serializable {
+@Data
+public abstract class BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

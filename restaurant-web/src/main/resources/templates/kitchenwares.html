@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'recipes')}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<!--/*@thymesVar id="ingredientType" type="com.app.resturant.model.IngredientType"*/-->
+<h1 th:text="'List of Kitchenwares'"></h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="kitchenware:${kitchenwares}">
+            <td th:text="${kitchenware?.id}">1</td>
+            <td th:text="${kitchenware?.name}">Chicken</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>Ą

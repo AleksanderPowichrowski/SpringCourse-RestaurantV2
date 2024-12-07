@@ -4,7 +4,7 @@ plugins {
     id 'java'
 }
 
-group = 'com.ap.restaurant'
+group = 'com.app.restaurant'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -22,6 +22,8 @@ subprojects {
         implementation 'org.springframework.boot:spring-boot-starter'
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+        implementation 'org.slf4j:slf4j-api:2.0.7' // Replace with the latest version
+        implementation 'ch.qos.logback:logback-classic:1.4.11' // Logback binding
         compileOnly 'org.projectlombok:lombok:1.18.36'
         annotationProcessor 'org.projectlombok:lombok:1.18.36'
 
@@ -32,7 +34,7 @@ subprojects {
     }
 }
 springBoot {
-    mainClass = 'com.ap.restaurant.web.RestaurantWebApplication'  // Make sure this matches your main class
+    mainClass = 'com.app.restaurant.web.RestaurantWebApplication'  // Make sure this matches your main class
 }
 test {
     useJUnitPlatform()
