@@ -2,7 +2,6 @@ package com.app.restaurant.web.controller.map;
 
 
 import com.app.resturant.model.BaseEntity;
-import com.app.resturant.service.db.IngredientTypeDbService;
 import com.app.resturant.service.map.IngredientTypeMapService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Profile;
@@ -20,8 +19,8 @@ public class IngredientTypeController {
     private final IngredientTypeMapService ingredientTypeService;
 
     @RequestMapping({"/types","/types.html"})
-    private String listTypes(Model model){
-        model.addAttribute("ingredientTypes",ingredientTypeService.findAll().stream().sorted(Comparator.comparing(BaseEntity::getId)));
+    public String listTypes(Model model){
+        model.addAttribute("ingredientTypes",ingredientTypeService.findAll().stream().sorted(Comparator.comparing(BaseEntity::getId)).toList());
         return "/types";
     }
 }

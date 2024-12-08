@@ -9,12 +9,14 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "Units")
 @Data
-@Builder
+
 @AllArgsConstructor
 @Entity
 public class UnitMeasure extends NamedBaseEntity{
-
+    @Builder
     public UnitMeasure(String name) {
         super(name);
     }
+
+
 }

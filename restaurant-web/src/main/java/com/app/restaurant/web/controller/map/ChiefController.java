@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Comparator;
@@ -22,9 +24,14 @@ public class ChiefController {
     private ChiefMapService chiefService;
     private ChiefMapper mapper;
 
+    @InitBinder
+    public void setAllowedFields(WebDataBinder dataBinder){
+        dataBinder.setDisallowedFields("id");
+    }
+
 
     @RequestMapping({"/chiefs","/chiefs.html"})
-    private String listTypes(Model model){
+    public String listChiefs(Model model){
         model.addAttribute("chiefsWithDetails",
                 mapper.map(chiefService.findAll())
         );

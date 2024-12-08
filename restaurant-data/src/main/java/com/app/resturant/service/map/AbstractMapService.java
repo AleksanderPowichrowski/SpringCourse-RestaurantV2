@@ -53,4 +53,7 @@ public class AbstractMapService<T extends BaseEntity, ID extends Long> implement
 
         return nextId;
     }
+    public void deleteAll(){
+        map.clear();
+    }
 }

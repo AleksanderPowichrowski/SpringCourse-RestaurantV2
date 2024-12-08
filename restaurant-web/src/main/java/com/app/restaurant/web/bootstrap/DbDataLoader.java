@@ -18,7 +18,6 @@ import java.util.List;
 @ComponentScan("com.app.resturant")
 @Profile("db")
 @Slf4j
-
 public class DbDataLoader extends AbstractDataLoader {
 
     private final IngredientTypeDbService ingredientTypeDbService;

@@ -20,7 +20,7 @@ public class KitchenWareDbController {
     @RequestMapping({"/kitchenwares","/kitchenwares.html"})
     private String listKitchenWares(Model model){
 
-        model.addAttribute("kitchenwares", kitchenWareDbService.findAll().stream().sorted(Comparator.comparing(BaseEntity::getId)));
+        model.addAttribute("kitchenwares", kitchenWareDbService.findAll().stream().sorted(Comparator.comparing(BaseEntity::getId)).toList());
         return "/kitchenwares";
     }
 

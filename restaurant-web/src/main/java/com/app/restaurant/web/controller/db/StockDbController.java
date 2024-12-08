@@ -22,7 +22,7 @@ public class StockDbController {
 
     @RequestMapping({"/stocks", "/stocks.html"})
     private String listStocks(Model model) {
-        model.addAttribute("stockList", mapper.map(stockDbService.findAll()).stream());
+        model.addAttribute("stockList", mapper.map(stockDbService.findAll()));
 
         return "/stocks";
     }

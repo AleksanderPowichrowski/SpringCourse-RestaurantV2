@@ -20,7 +20,7 @@ public class IngredientTypeDbController {
 
     @RequestMapping({"/types","/types.html"})
     private String listTypes(Model model){
-        model.addAttribute("ingredientTypes",ingredientTypeService.findAll().stream().sorted(Comparator.comparing(BaseEntity::getId)));
+        model.addAttribute("ingredientTypes",ingredientTypeService.findAll().stream().sorted(Comparator.comparing(BaseEntity::getId)).toList());
         return "/types";
     }
 }

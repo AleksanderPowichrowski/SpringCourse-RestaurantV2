@@ -5,6 +5,15 @@ import com.app.resturant.model.IngredientType;
 import java.util.Set;
 
 public class IngredientTypeMapService extends AbstractMapService<IngredientType,Long>{
+
+    public IngredientType findByName(String name){
+       for(var val :  map.values()){
+           if(val.getName().equals(name))
+               return val;
+       }
+       return null;
+
+    }
     @Override
     public Set<IngredientType> findAll() {
         return super.findAll();

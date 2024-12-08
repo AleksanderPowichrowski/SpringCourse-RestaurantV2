@@ -25,7 +25,7 @@ public class RecipeController {
 
 
     @RequestMapping({"/recipes", "/recipes.html"})
-    private String listTypes(Model model) {
+    public String listRecipes(Model model) {
 
         model.addAttribute("recipesWithDetails",mapper.map(recipeService.findAll()));
         return "/recipes";

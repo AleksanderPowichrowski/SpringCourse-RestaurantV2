@@ -19,7 +19,7 @@ public class StockController {
     private StockMapper mapper;
 
     @RequestMapping({"/stocks","/stocks.html"})
-    private String listStocks(Model model){
+    public String listStocks(Model model){
 
         model.addAttribute("stockList", mapper.map(stockService.findAll()));
         return "/stocks";

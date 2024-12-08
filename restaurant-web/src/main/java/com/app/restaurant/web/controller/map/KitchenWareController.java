@@ -18,9 +18,9 @@ public class KitchenWareController {
 
 
     @RequestMapping({"/kitchenwares","/kitchenwares.html"})
-    private String listKitchenWare(Model model){
+    public String listKitchenWare(Model model){
 
-        model.addAttribute("kitchenwares", kitchenWareService.findAll().stream().sorted(Comparator.comparing(BaseEntity::getId)));
+        model.addAttribute("kitchenwares", kitchenWareService.findAll().stream().sorted(Comparator.comparing(BaseEntity::getId)).toList());
         return "/kitchenwares";
     }
 
