@@ -32,7 +32,6 @@ public class ChiefMapService extends AbstractMapService<Chief,Long>{
     }
 
     public Chief findByName(String name){
-        Chief chief = null;
         for(var entry : map.entrySet()){
             String entryName = entry.getValue().getName();
             if(entryName.equalsIgnoreCase(name))

@@ -6,13 +6,13 @@ spring:
       - restaurant
       - db
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: SYSTEM
+    password: password
+    driver-class-name: oracle.jdbc.OracleDriver
   jpa:
     hibernate:
       ddl-auto: update
+    database: oracle
+    show-sql: false
+    database-platform: org.hibernate.dialect.Oracle12cDialect

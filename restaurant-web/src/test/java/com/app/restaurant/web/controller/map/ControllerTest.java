@@ -39,7 +39,7 @@ class ControllerTest extends BasicRestaurantTest {
 
         mockMvc.perform(get("/types.html"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/types"))
+                .andExpect(view().name("/types/types"))
                 .andExpect(model().attribute("ingredientTypes", hasSize(4)));
     }
 }

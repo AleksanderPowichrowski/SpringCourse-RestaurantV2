@@ -2,11 +2,9 @@ package com.app.resturant.service.map;
 
 import com.app.resturant.BasicRestaurantTest;
 import com.app.resturant.model.*;
-import com.app.resturant.model.constants.*;
-import com.app.resturant.service.map.*;
+import com.app.resturant.model.constants.CHIEF_LEVEL;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 
 import java.util.HashMap;
 import java.util.List;

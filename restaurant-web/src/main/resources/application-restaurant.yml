@@ -104,3 +104,8 @@ restaurant:
       chiefLevel: "BEGINNER"
       knownRecipes:
         - "Vegetable Stir Fry"
+  dishes:
+    - name: "Fried chicken with sliced vegetables"
+      cost: 38.50
+    - name: "Vegetable Stir Fry"
+      cost: 29.24

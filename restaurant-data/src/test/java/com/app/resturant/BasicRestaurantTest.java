@@ -5,7 +5,9 @@ import com.app.resturant.model.*;
 import com.app.resturant.model.constants.CHIEF_LEVEL;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +38,17 @@ public class BasicRestaurantTest {
     protected Ingredient fishDetail;
     protected Ingredient lambDetail;
     protected Ingredient portDetail;
+    protected Recipe friedChickenVegetablesRecipe;
+    protected Recipe friefBeefVegetablesRecipe;
+    protected Recipe vegetableSaladRecipe;
+    protected Dish friedChickenVegetablesDish;
+    protected Dish friefBeefVegetablesDish;
+    protected Dish vegetableSaladDish;
+    protected Order orderNow;
+    protected Order orderOld;
+    protected Order orderFuture;
+
+
 
     @BeforeEach
     void setup() {
@@ -67,6 +80,18 @@ public class BasicRestaurantTest {
         fishDetail = Ingredient.builder().ingredientType(fish).unitMeasure(unit).build();
         lambDetail = Ingredient.builder().ingredientType(lamb).unitMeasure(unit).build();
         portDetail = Ingredient.builder().ingredientType(pork).unitMeasure(unit).build();
+
+        friedChickenVegetablesRecipe = createFriedChickenVegetablesRecipe();
+        friefBeefVegetablesRecipe = createFriefBeefVegetablesRecipe();
+        vegetableSaladRecipe = createVegetableSaladRecipe();
+
+        friedChickenVegetablesDish = createFriedChickenVegetablesDish();
+        friefBeefVegetablesDish = createFriedBeefVegetablesDish();
+        vegetableSaladDish = createVegetableSaladDish();
+
+        orderNow = createOrderNow();
+        orderOld = createOrderOld();
+        orderFuture = createOrderFuture();
 
 
     }
@@ -195,6 +220,69 @@ public class BasicRestaurantTest {
                 .name("Krzysztof")
                 .chiefLevel(CHIEF_LEVEL.BEGINNER)
                 .knownRecipes(List.of(createVegetableSaladRecipe()))
+                .build();
+    }
+
+    protected Dish createFriedBeefVegetablesDish(){
+        return Dish.builder()
+                .name(friefBeefVegetablesRecipe.getName())
+                .cost(new BigDecimal("44.55"))
+                .build();
+
+    }
+
+    protected Dish createVegetableSaladDish(){
+        return Dish.builder()
+                .name(vegetableSaladRecipe.getName())
+                .cost(new BigDecimal("25.55"))
+                .build();
+
+    }
+    protected Dish createFriedChickenVegetablesDish(){
+        return Dish.builder()
+                .name(friedChickenVegetablesRecipe.getName())
+                .cost(new BigDecimal("37.44"))
+                .build();
+
+    }
+
+    protected Order createOrderNow(){
+        List<Dish> dishes = List.of(
+                createFriedChickenVegetablesDish(),
+                createFriedChickenVegetablesDish(),
+                createVegetableSaladDish(),
+                createVegetableSaladDish()
+                );
+        return Order.builder()
+                .dishes(dishes)
+                .orderDateTime(LocalDateTime.now())
+                .build();
+    }
+    protected Order createOrderNow(Dish... dishes){
+
+        return Order.builder()
+                .dishes(Arrays.asList(dishes))
+                .orderDateTime(LocalDateTime.now())
+                .build();
+    }
+    protected Order createOrderOld(){
+        List<Dish> dishes = List.of(
+                createFriedBeefVegetablesDish(),
+                createVegetableSaladDish()
+        );
+        return Order.builder()
+                .dishes(dishes)
+                .orderDateTime(LocalDateTime.now().minusDays(3))
+                .build();
+    }
+    protected Order createOrderFuture(){
+        List<Dish> dishes = List.of(
+                createFriedBeefVegetablesDish(),
+                createFriedChickenVegetablesDish()
+        );
+        return Order.builder()
+                .dishes(dishes)
+                .orderDateTime(LocalDateTime.now().plusDays(3))
                 .build();
     }
 

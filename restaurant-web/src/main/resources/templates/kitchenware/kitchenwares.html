@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'recipes')}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'kitchenwares')}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,6 +8,10 @@
 <body>
 <!--/*@thymesVar id="ingredientType" type="com.app.resturant.model.IngredientType"*/-->
 <h1 th:text="'List of Kitchenwares'"></h1>
+<button class="btn btn-primary"
+        th:onclick="|window.location.href='/kitchenwares/' + 'new'|">
+    Add
+</button>
     <table class="table table-striped">
         <thead>
         <tr>

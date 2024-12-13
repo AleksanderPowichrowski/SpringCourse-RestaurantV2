@@ -1,18 +1,12 @@
 package com.app.restaurant.web.bootstrap;
 
-import com.app.restaurant.web.config.model.RestaurantConfig;
-import com.app.resturant.model.*;
-import com.app.resturant.repositories.RecipeDbRepository;
 import com.app.resturant.service.db.*;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 @ComponentScan("com.app.resturant")
@@ -25,7 +19,9 @@ public class DbDataLoader extends AbstractDataLoader {
     private final StockDbService stockDbService;
     private final UnitMeasureDbService unitMeasureDbService;
     private final ChiefDbService chiefDbService;
-    private final RecipeDbRepository recipeDbRepository;
+    private final RecipeDbService recipeDbService;
+    private final DishDbService dishDbService;
+
 
     public DbDataLoader(ApplicationContext ctx,
                         IngredientTypeDbService ingredientTypeDbService,
@@ -33,14 +29,16 @@ public class DbDataLoader extends AbstractDataLoader {
                         StockDbService stockDbService,
                         UnitMeasureDbService unitMeasureDbService,
                         ChiefDbService chiefDbService,
-                        RecipeDbRepository recipeDbRepository) {
+                        RecipeDbService recipeDbService,
+                        DishDbService dishDbService){
         super(ctx);
         this.ingredientTypeDbService = ingredientTypeDbService;
         this.kitchenWareDbService = kitchenWareDbService;
         this.stockDbService = stockDbService;
         this.unitMeasureDbService = unitMeasureDbService;
         this.chiefDbService = chiefDbService;
-        this.recipeDbRepository = recipeDbRepository;
+        this.recipeDbService = recipeDbService;
+        this.dishDbService = dishDbService;
     }
 
     @Override
@@ -52,7 +50,8 @@ public class DbDataLoader extends AbstractDataLoader {
         kitchenWareDbService.saveAll(kitchenWareList);
         unitMeasureDbService.saveAll(unitMeasureList);
         stockDbService.saveAll(stockCapacityList);
-        recipeDbRepository.saveAll(recipeList);
+        recipeDbService.saveAll(recipeList);
         chiefDbService.saveAll(chiefList);
+        dishDbService.saveAll(dishList);
     }
 }

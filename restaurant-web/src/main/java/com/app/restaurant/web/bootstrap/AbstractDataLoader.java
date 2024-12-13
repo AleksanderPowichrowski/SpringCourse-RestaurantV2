@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,6 +19,9 @@ public class AbstractDataLoader implements ApplicationListener<ContextRefreshedE
     List<UnitMeasure> unitMeasureList;
     List<Recipe> recipeList;
     List<Chief> chiefList;
+    List<Dish> dishList;
+    List<Order> orderList = new ArrayList<>();
+
 
     public AbstractDataLoader(ApplicationContext ctx) {
         this.ctx = ctx;
@@ -41,5 +45,6 @@ public class AbstractDataLoader implements ApplicationListener<ContextRefreshedE
         unitMeasureList = restaurantConfig.getUnits();
         recipeList = restaurantConfig.getRecipesFrom();
         chiefList = restaurantConfig.getChiefs(recipeList);
+        dishList = restaurantConfig.getDishes();
     }
 }

@@ -2,8 +2,6 @@ package com.app.resturant.service.map;
 
 import com.app.resturant.BasicRestaurantTest;
 import com.app.resturant.model.IngredientType;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

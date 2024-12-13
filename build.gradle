@@ -1,3 +1,11 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.oracle.database.jdbc:ojdbc8:19.16.0.0'
+    }
+}
 plugins {
     id 'org.springframework.boot' version '3.4.0' // Replace with your desired version
     id 'io.spring.dependency-management' version '1.1.6'
@@ -9,6 +17,10 @@ version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+dependencies {
+    implementation 'com.oracle.database.jdbc:ojdbc8:19.16.0.0'
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc8:19.16.0.0'
 }
 
 subprojects {
@@ -34,8 +46,296 @@ subprojects {
     }
 }
 springBoot {
-    mainClass = 'com.app.restaurant.web.RestaurantWebApplication'  // Make sure this matches your main class
+    mainClass = 'com.app.restaurant.web.RestaurantWebApplication'
 }
 test {
     useJUnitPlatform()
+}
+
+import groovy.sql.Sql
+import oracle.jdbc.OracleDriver
+
+import java.sql.Connection
+import java.sql.DriverManager
+import java.sql.SQLException
+
+//tasks.register('restartServices') {
+//    group = "Custom Tasks"
+//    description = "Restarts the database and the application."
+//
+//    doLast {
+//        println "Stopping Docker Compose services..."
+//        def stopCommand = "docker-compose -f restaurant-docker/src/com/app/restaurant/docker/oracle-db-docker.yml down"
+//        exec {
+//            commandLine = stopCommand.split(" ")
+//        }
+//
+//        println "Starting Docker Compose services..."
+//        def startCommand = "docker-compose -f restaurant-docker/src/com/app/restaurant/docker/oracle-db-docker.yml up -d"
+//        exec {
+//            commandLine = startCommand.split(" ")
+//        }
+//
+//        println "Waiting for the database to be ready..."
+//
+//        // Dynamically construct the runtime classpath
+//        def runtimeClasspath = configurations.runtimeClasspath.files
+//        println "Runtime Classpath:"
+//        runtimeClasspath.each { println it }
+//
+//        // Create a custom class loader with runtime classpath
+//        URL[] classpathUrls = runtimeClasspath.collect { it.toURI().toURL() } as URL[]
+//        URLClassLoader loader = new URLClassLoader(classpathUrls, this.class.classLoader)
+//
+//        loader.with {
+//            def jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE"
+//            def username = "SYSTEM"
+//            def password = "password"
+//
+//            try {
+//                println "Explicitly loading Oracle JDBC Driver..."
+//                // Load the driver explicitly
+//                Class.forName("oracle.jdbc.OracleDriver", true, loader)
+//                println "Oracle JDBC Driver loaded successfully."
+//
+//                println "Testing database connection..."
+//                def connection = java.sql.DriverManager.getConnection(jdbcUrl, username, password)
+//                println "Connected to the database successfully: ${connection.metaData.databaseProductName}"
+//                connection.close()
+//            } catch (ClassNotFoundException e) {
+//                println "Driver class not found: ${e.message}"
+//                throw e
+//            } catch (SQLException e) {
+//                println "SQL error during connection: ${e.message}"
+//                throw e
+//            } catch (Exception e) {
+//                println "Unexpected error: ${e.message}"
+//                throw e
+//            }
+//        }
+//
+//        println "Restarting the Spring Boot application..."
+//        def restartCommand = "./gradlew.bat :restaurant-web:bootRun"
+//        exec {
+//            workingDir = projectDir
+//            commandLine = restartCommand.split(" ")
+//        }
+//    }
+//}
+
+
+
+tasks.register('restartServices') {
+    group = "Custom Tasks"
+    description = "Restarts the database and the application."
+
+    doLast {
+        println "Stopping Docker Compose services..."
+        def stopCommand = "docker-compose -f restaurant-docker/src/com/app/restaurant/docker/oracle-db-docker.yml down"
+        exec {
+            commandLine = stopCommand.split(" ")
+        }
+
+        println "Starting Docker Compose services..."
+        def startCommand = "docker-compose -f restaurant-docker/src/com/app/restaurant/docker/oracle-db-docker.yml up -d"
+        exec {
+            commandLine = startCommand.split(" ")
+        }
+        println "Waiting for the database to be ready..."
+        waitForDatabase("localhost", 1521,"SYSTEM","password","XE") // Replace with your DB host and port
+
+        println "Restarting the Spring Boot application..."
+        def restartCommand = "./gradlew.bat :restaurant-web:bootRun"
+        exec {
+            workingDir = projectDir
+            commandLine = restartCommand.split(" ")
+        }
+    }
+}
+import groovy.sql.Sql
+
+import java.sql.SQLException
+
+
+//def waitForDatabase(host, port, username, password, sid) {
+//    def maxRetries = 600
+//    def waitTime = 1000 // Wait time in milliseconds
+//    def retries = 0
+//    def runtimeClasspath = configurations.runtimeClasspath.files
+//    URL[] classpathUrls = runtimeClasspath.collect { it.toURI().toURL() } as URL[]
+//    URLClassLoader loader = new URLClassLoader(classpathUrls, this.class.classLoader)
+//    Class.forName("oracle.jdbc.OracleDriver", true, loader)
+//    loader.with {
+////    def jdbcUrl = "jdbc:oracle:thin:@${host}:${port}:${sid}"
+//        def jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE"
+//
+//        while (retries < maxRetries) {
+//            try {
+//                println "Attempting to connect to database... (Attempt ${retries + 1}/${maxRetries})"
+//                Sql sql = Sql.newInstance(jdbcUrl, username, password, "oracle.jdbc.OracleDriver")
+//                sql.execute("SELECT 1 FROM DUAL") // Simple query to check readiness
+//                sql.close()
+//
+//                println "Database is ready!"
+//                return
+//            } catch (SQLException e) {
+//                println "Database not ready yet: ${e.message}"
+//            } catch (Exception e) {
+//                println "Unexpected error: ${e}"
+//            }
+//
+//            Thread.sleep(waitTime)
+//            retries++
+//        }
+//    }
+//
+//    throw new GradleException("Database not ready after ${maxRetries} attempts.")
+//}
+//def waitForDatabase(host, port, username, password, sid) {
+//    def maxRetries = 600
+//    def waitTime = 1000 // Wait time in milliseconds
+//    def retries = 0
+//
+//    println "Building runtime classpath..."
+//    def runtimeClasspath = configurations.runtimeClasspath.files
+//    runtimeClasspath.each { println "Classpath entry: ${it}" }
+//
+//    URL[] classpathUrls = runtimeClasspath.collect { it.toURI().toURL() } as URL[]
+//    URLClassLoader loader = new URLClassLoader(classpathUrls, this.class.classLoader)
+//
+//    // Explicitly load the Oracle JDBC Driver
+//    println "Explicitly loading Oracle JDBC Driver..."
+//    Class.forName("oracle.jdbc.OracleDriver", true, loader)
+//    println "Oracle JDBC Driver loaded successfully."
+//
+//    def jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE"
+//    println "JDBC URL: ${jdbcUrl}"
+//
+//    while (retries < maxRetries) {
+//        try {
+//            println "Attempting to connect to database... (Attempt ${retries + 1}/${maxRetries})"
+//            println "1"
+//            Sql sql = Sql.newInstance(jdbcUrl, username, password, "oracle.jdbc.OracleDriver")
+//            println "2"
+//            sql.execute("SELECT 1 FROM DUAL") // Simple query to check readiness
+//            println "3"
+//            sql.close()
+//
+//            println "Database is ready!"
+//            return
+//        } catch (SQLException e) {
+//            println "Database not ready yet: ${e}"
+//        } catch (Exception e) {
+//            println "Unexpected error: ${e}"
+//        }
+//
+//        Thread.sleep(waitTime)
+//        retries++
+//    }
+//
+//    throw new GradleException("Database not ready after ${maxRetries} attempts.")
+//}
+//import groovy.sql.Sql
+//
+
+
+//tasks.register('waitForDatabaseTask') {
+//    def maxRetries = 600
+//    def waitTime = 1000 // Wait time in milliseconds
+//    def retries = 0
+//
+//    println "Building runtime classpath..."
+//    def runtimeClasspath = configurations.runtimeClasspath.files
+//    runtimeClasspath.each { println "Classpath entry: ${it}" }
+//
+//    // Add the runtime classpath and load the driver explicitly
+//    URL[] classpathUrls = runtimeClasspath.collect { it.toURI().toURL() } as URL[]
+//    URLClassLoader loader = new URLClassLoader(classpathUrls, this.class.classLoader)
+//
+//    loader.with {
+//        try {
+//            println "Explicitly loading Oracle JDBC Driver..."
+//            Class.forName("oracle.jdbc.OracleDriver", true, loader)
+//            println "Oracle JDBC Driver loaded successfully."
+//
+//            // Explicitly register the driver with DriverManager
+//            println "Registering Oracle JDBC Driver with DriverManager..."
+//            DriverManager.registerDriver(new oracle.jdbc.OracleDriver())
+//            println "Oracle JDBC Driver registered successfully."
+//        } catch (ClassNotFoundException e) {
+//            println "Driver class not found: ${e.message}"
+//            throw new GradleException("Oracle JDBC Driver not found in runtime classpath.", e)
+//        }
+//    }
+//
+//    // JDBC URL for the database
+//    def jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE"
+//    println "JDBC URL: ${jdbcUrl}"
+//
+//    while (retries < maxRetries) {
+//        try {
+//            println "Attempting to connect to database... (Attempt ${retries + 1}/${maxRetries})"
+//            def connection = java.sql.DriverManager.getConnection(jdbcUrl, username, password)
+//            println "Database connection successful: ${connection.metaData.databaseProductName}"
+//            connection.close()
+//
+//            println "Database is ready!"
+//            return
+//        } catch (SQLException e) {
+//            println "Database not ready yet: ${e.message}"
+//        } catch (Exception e) {
+//            println "Unexpected error: ${e.message}"
+//        }
+//
+//        Thread.sleep(waitTime)
+//        retries++
+//    }
+//
+//    throw new GradleException("Database not ready after ${maxRetries} attempts.")
+//}
+
+def waitForDatabase(host, port, username, password, sid) {
+    def maxRetries = 600
+    def waitTime = 1000 // Wait time in milliseconds
+    def retries = 0
+
+    println "Explicitly loading Oracle JDBC Driver..."
+    Class.forName("oracle.jdbc.OracleDriver")
+    println "Oracle JDBC Driver loaded successfully."
+
+    println "Registering OracleDriver with DriverManager..."
+    DriverManager.registerDriver(new OracleDriver())
+    println "OracleDriver registered successfully."
+
+    def jdbcUrl = "jdbc:oracle:thin:@${host}:${port}:${sid}"
+    println "JDBC URL: ${jdbcUrl}"
+
+    def props = new Properties()
+    props.setProperty("user", username)
+    props.setProperty("password", password)
+
+    while (retries < maxRetries) {
+        try {
+            println "Attempting to connect to database... (Attempt ${retries + 1}/${maxRetries})"
+
+            // Directly create a connection using the OracleDriver
+            OracleDriver driver = new OracleDriver()
+            Connection connection = driver.connect(jdbcUrl, props)
+
+            println "Connected to the database successfully: ${connection.metaData.databaseProductName}"
+            connection.close()
+
+            println "Database is ready!"
+            return
+        } catch (SQLException e) {
+            println "Database not ready yet: ${e.message}"
+        } catch (Exception e) {
+            println "Unexpected error: ${e.message}"
+        }
+
+        Thread.sleep(waitTime)
+        retries++
+    }
+
+    throw new GradleException("Database not ready after ${maxRetries} attempts.")
 }

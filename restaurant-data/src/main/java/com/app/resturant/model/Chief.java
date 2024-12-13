@@ -3,7 +3,10 @@ package com.app.resturant.model;
 
 import com.app.resturant.model.constants.CHIEF_LEVEL;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;

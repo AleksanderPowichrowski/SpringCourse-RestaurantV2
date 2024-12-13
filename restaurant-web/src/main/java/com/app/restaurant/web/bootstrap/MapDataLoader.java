@@ -1,18 +1,12 @@
 package com.app.restaurant.web.bootstrap;
 
-import com.app.restaurant.web.config.model.RestaurantConfig;
-import com.app.resturant.model.*;
 import com.app.resturant.service.map.*;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-
-import java.util.*;
 
 @Component
 

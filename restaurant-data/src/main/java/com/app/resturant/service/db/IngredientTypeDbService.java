@@ -5,6 +5,8 @@ import com.app.resturant.repositories.IngredientTypeDbRepository;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
+
 @Service
 @Profile("db")
 public class IngredientTypeDbService extends AbstractDbService<IngredientType,Long, IngredientTypeDbRepository> {
@@ -22,4 +24,14 @@ public class IngredientTypeDbService extends AbstractDbService<IngredientType,Lo
        return null;
    }
 
+    @Override
+    public IngredientType save(IngredientType object) {
+        Iterator<IngredientType> repositoryIterator = repository.findAll().iterator();
+        while(repositoryIterator.hasNext()){
+            IngredientType ingredientType = repositoryIterator.next();
+            if(ingredientType.getName().equalsIgnoreCase(object.getName()))
+                throw new RuntimeException("Ingredient type '" + object.getName() + "' already exist.");
+        }
+        return super.save(object);
+    }
 }

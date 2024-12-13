@@ -9,7 +9,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.IncompatibleConfigurationException;
 import org.springframework.context.annotation.Configuration;
 
-
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -26,6 +25,7 @@ public class RestaurantConfig {
     private List<KitchenWare> kitchenWare = new ArrayList<>();
     private List<Map<String, Object>> recipes = new ArrayList<>();
     private List<Map<String, Object>> chiefs = new ArrayList<>();
+    private List<Dish> dishes = new ArrayList<>();
 
     public List<Stock> getStockWithIngredientTypes() {
         Map<String, IngredientType> ingredientTypeMap = ingredientType.stream()

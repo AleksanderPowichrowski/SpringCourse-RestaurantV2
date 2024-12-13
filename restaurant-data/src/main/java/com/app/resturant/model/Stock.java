@@ -1,11 +1,13 @@
 package com.app.resturant.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Map;
 
 
@@ -16,7 +18,7 @@ import java.util.Map;
 @NoArgsConstructor
 public class Stock extends BaseEntity{
 
-    @Column(name = "date")
+    @Column(name = "\"date\"")
     @DateTimeFormat(pattern = "yyyy-MM-dd:HH-mm")
     private LocalDateTime stockDate;
 

@@ -2,7 +2,6 @@ package com.app.resturant.service.map;
 
 import com.app.resturant.model.UnitMeasure;
 import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
 
 import java.util.Set;
 

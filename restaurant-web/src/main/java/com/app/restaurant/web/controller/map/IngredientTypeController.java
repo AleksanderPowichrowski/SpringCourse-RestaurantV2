@@ -23,4 +23,5 @@ public class IngredientTypeController {
         model.addAttribute("ingredientTypes",ingredientTypeService.findAll().stream().sorted(Comparator.comparing(BaseEntity::getId)).toList());
         return "/types";
     }
+
 }

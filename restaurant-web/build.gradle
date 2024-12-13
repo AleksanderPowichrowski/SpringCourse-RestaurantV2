@@ -29,6 +29,8 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.4.11' // Logback binding
     compileOnly 'org.projectlombok:lombok:1.18.36'
     annotationProcessor 'org.projectlombok:lombok:1.18.36'
+    implementation 'com.oracle.database.jdbc:ojdbc8:19.16.0.0'
+    implementation 'org.hibernate.orm:hibernate-core:6.2.10.Final'
 
     testCompileOnly 'org.projectlombok:lombok:1.18.36'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
@@ -36,6 +38,13 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'junit:junit:4.13.2'
     implementation project(':restaurant-data')
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+
+    // Add an implementation of the Validation API (Hibernate Validator)
+    implementation 'org.hibernate.validator:hibernate-validator:6.2.5.Final'
+
+    // Add optional dependencies for Hibernate Validator
+    implementation 'org.glassfish:javax.el:3.0.0' // Required for some environments
 }
 
 tasks.named('test') {

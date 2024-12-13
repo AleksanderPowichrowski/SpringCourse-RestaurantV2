@@ -1,7 +1,6 @@
 package com.app.restaurant.web.mapper.thymeleaf;
 
 import com.app.restaurant.web.mapper.Mapper;
-import com.app.resturant.model.BaseEntity;
 import com.app.resturant.model.Ingredient;
 import com.app.resturant.model.Stock;
 import org.springframework.stereotype.Component;
